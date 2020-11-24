@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,7 @@ public class UserController {
 
     final String token = jwtUtility.generateToken(userDetails);
 
-    return new JWTResponse(token,userDetails.getUsername());
+    return new JWTResponse(token,userDetails.getUsername(), (List<GrantedAuthority>) userDetails.getAuthorities());
 
 
 
